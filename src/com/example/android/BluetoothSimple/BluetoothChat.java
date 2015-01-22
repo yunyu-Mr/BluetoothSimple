@@ -145,6 +145,7 @@ public class BluetoothChat extends Activity {
 
         // Initialize the array adapter for the conversation thread
         mConversationArrayAdapter = new ArrayAdapter<String>(this, R.layout.message);
+        
 //        mConversationView = (ListView) findViewById(R.id.in);
 //        mConversationView.setAdapter(mConversationArrayAdapter);
 //
@@ -280,7 +281,7 @@ public class BluetoothChat extends Activity {
     }
 
 //    // The action listener for the EditText widget, to listen for the return key
-//    //鐩戝惉鍥炶溅寤?
+//    //监听回车建
 //    private TextView.OnEditorActionListener mWriteListener =
 //        new TextView.OnEditorActionListener() {
 //        public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
@@ -306,8 +307,8 @@ public class BluetoothChat extends Activity {
 
     /**
      * The Handler that gets information back from the BluetoothChatService
-     * mHandler璐熻矗澶勭悊涓庡悗鍙癇luetoothService鐨勯?淇?
-     * 鍚庡彴Service灏唌sg鍙戝埌杩欓噷鏉ヨ繘琛屽鐞?
+     * mHandler负责处理与后台BluetoothService的通信
+ 	 * 后台Service将msg发到这里来进行处理
      */
     private final Handler mHandler = new Handler() {
         @Override
@@ -394,33 +395,33 @@ public class BluetoothChat extends Activity {
         mChatService.connect(device, secure);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option_menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.option_menu, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent serverIntent = null;
-        switch (item.getItemId()) {
-        case R.id.secure_connect_scan:
-            // Launch the DeviceListActivity to see devices and do scan
-            serverIntent = new Intent(this, DeviceListActivity.class);
-            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
-            return true;
-        case R.id.insecure_connect_scan:
-            // Launch the DeviceListActivity to see devices and do scan
-            serverIntent = new Intent(this, DeviceListActivity.class);
-            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
-            return true;
-        case R.id.discoverable:
-            // Ensure this device is discoverable by others
-            ensureDiscoverable();
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        Intent serverIntent = null;
+//        switch (item.getItemId()) {
+//        case R.id.secure_connect_scan:
+//            // Launch the DeviceListActivity to see devices and do scan
+//            serverIntent = new Intent(this, DeviceListActivity.class);
+//            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
+//            return true;
+//        case R.id.insecure_connect_scan:
+//            // Launch the DeviceListActivity to see devices and do scan
+//            serverIntent = new Intent(this, DeviceListActivity.class);
+//            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
+//            return true;
+//        case R.id.discoverable:
+//            // Ensure this device is discoverable by others
+//            ensureDiscoverable();
+//            return true;
+//        }
+//        return false;
+//    }
 
 }
